@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>COMP1927 15s2 Final Exam</title>
+<link rel='stylesheet' type='text/css' href='exam.css'></head>
+<body>
+<div align='center'>
+<table width='100%' border='0'>
+<tr valign='top'>
+<td align='left' width='25%'>
+  <span class='tiny'>COMP1927 15s2</span>
+</td>
+<td align='center' width='50%'>
+  <span class='heading'>COMP1927 15s2 Final Exam</span>
+</td>
+<td align='right' width='25%'>
+  <span class='tiny'>Computing 2</span>
+</td>
+</table>
+</div>
+<center><a href='index.html'>[Instructions]</a> <a target='C' href='C/index.html'>[C language]</a> <a target='Algos' href='Algos/index.html'>[Algorithms]</a> <br><b>[Q1]</b> <a href='Q02.html'>[Q2]</a> <a href='Q03.html'>[Q3]</a> <a href='Q04.html'>[Q4]</a> <a href='Q05.html'>[Q5]</a> <a href='Q06.html'>[Q6]</a> <a href='Q07.html'>[Q7]</a> <a href='Q08.html'>[Q8]</a> <a href='Q09.html'>[Q9]</a> 
+</center>
+<hr>
+<div style='margin-left:40px;margin-right:40px'>
+<h3>Question 1 <span class='tiny'>(10 marks)</span></h3>
+<p>
+In the <tt>q1</tt> directory (in the file <tt>main.c</tt>),
+is a program which
+</p>
+<ul>
+<li>reads a sequence of integers from stdin and stores them in a binary search tree <tt>t</tt></li>
+<li>displays the tree</li>
+<li>calls a function <tt>map(t,f)</tt> to modify the value in each node in the tree using a function parameter <tt>f</tt></li>
+<li>displays the modified tree</li>
+</ul>
+<p>
+It determines which function to apply based on a command line argument.
+The following examples show which functions are available:
+</p>
+<center>
+<table border="1" cellpadding="6" cellspacing="0">
+<tr><th>Command</th><th>Effect</tt></tr>
+<tr><td><nobr><tt>./q1 1 &lt; tests/tree1</tt></nobr></td><td>reads values from file <tt>tests/tree1</tt> and decrements each value by 1 (using the function <tt>decr()</tt>)</td></tr>
+<tr><td><nobr><tt>./q1 2 &lt; tests/tree1</tt></nobr></td><td>reads values from file <tt>tests/tree1</tt> and doubles each value (using the function <tt>duble()</tt>)</td></tr>
+<tr><td><nobr><tt>./q1 3 &lt; tests/tree1</tt></nobr></td><td>reads values from file <tt>tests/tree1</tt> and squares each value (using the function <tt>square()</tt>)</td></tr>
+</table>
+</center>
+<p>
+The <tt>decr()</tt>, <tt>duble()</tt> and <tt>square()</tt> functions are
+all defined in <tt>main.c</tt>. The <tt>map()</tt> function is defined in the <tt>BSTree</tt> ADT.
+</p>
+<p>
+The <tt>q1</tt> directory also contains an implementation
+of a binary search tree ADT in the files <tt>BSTree.h</tt> and <tt>BSTree.c</tt>.
+You do not need to understand the details of all of the functions in <tt>BSTree.c</tt>,
+but you should familiarise yourself with the structure of <tt>BSTreeNode</tt>s
+as defined in that file.
+</p>
+<p>
+<b>Your task</b> for this question is to implement the <tt>map()</tt> function
+in the <tt>BSTree.c</tt> file.
+</p>
+<p>
+The <tt>map()</tt> function is defined as follows:
+</p>
+<pre>
+void map(BSTree t, int (*f)(int)) { ... }
+</pre>
+<p>
+and takes two parameters:
+</p>
+<ul>
+<li> <tt>t</tt> ... an instance of the <tt>BSTree</tt> ADT (i.e. a binary search tree) </li>
+<li> <tt>f</tt> ... a pointer to a function mapping an <tt>int</tt> to an <tt>int</tt> </li>
+</ul>
+<p>
+The <tt>map()</tt> function applies <tt>f</tt> to the value in
+each tree node, and then replaces the original value in the node
+by the result returned by the function.
+The actual function supplied for <tt>f</tt> must have the type
+<tt>int</tt>&rightarrow;<tt>int</tt> (e.g. like <tt>decr()</tt>).
+You can find a skeleton <tt>map()</tt> function at around line 137
+in the <tt>BSTree.c</tt> file.
+</p>
+<p>
+You can find out more about the behaviour of the <tt>q1</tt> program
+by looking at the files in <tt>q1/tests</tt> directory.
+Each file named <tt>t<i>X</i>.sh</tt> contains the commands to run one test.
+Each test uses one of the files named <tt>tree<i>X</i></tt> as input.
+Each test has a corresponding file <tt>t<i>X</i>.exp</tt> which contains
+the expected output from a correct implementation of <tt>q1</tt>,
+run using <tt>t<i>X</i>.sh</tt>.
+</p>
+<p>
+The <tt>q1</tt> directory also contains a <tt>Makefile</tt> which you use as:
+</p>
+<pre>
+make q1    <span class="comment"># build the q1 program</span>
+</pre>
+<p>
+You can test your <tt>q1</tt> program using the command:
+</p>
+<pre>
+check q1   <span class="comment"># run tests on the q1 program</span>
+</pre>
+<p>
+Once you are satisfied with your program, submit it using the command:
+</p>
+<pre>
+submit q1
+</pre>
+<p>
+This will make a copy of the <tt>BSTree.c</tt> file from the <tt>q1</tt>
+directory as your answer for this question.
+You can run the <tt>submit</tt> command as many times as you like,
+but make sure that your final submission compiles without any errors
+or warnings.
+Test your program thoroughly, possibly using test cases additional
+to those supplied. Your program will be tested using inputs which
+are different to the examples in the <tt>q1/tests</tt> directory.
+</p>
+<p>
+You can add any additional functions (apart from <tt>map()</tt>) to
+the <tt>BSTree.c</tt> file, but you may not change any of the other
+files.
+</p>
+<p>
+If, at some stage, you need to "re-install" the files (although you
+should not need to), you can copy all of the original files
+into the <tt>q1</tt> directory by running the command:
+</p>
+<pre>
+re-start q1
+</pre>
+<p>
+Beware: this will overwrite all of your exsting files for this
+question, so only do it if you seriously mess things up.
+</p>
+
+
+
+</div>
+</body>
+</html>

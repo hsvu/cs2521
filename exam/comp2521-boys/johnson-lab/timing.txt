@@ -1,0 +1,18 @@
+Input	Initial	Has	Number	AvgTime	AvgTime
+Size	Order	Dups	of runs	forusel	forsort
+5000	random	no	3	0.124	0.008
+5000	sorted	no	3   0.181	0.004
+5000	reverse	no	3	0.102	0.004
+5000	random	yes	3	0.152	0.008
+5000	sorted	yes	3	0.184	0.002
+5000	reverse	yes	3	0.092	0.004
+10000	random	no	3	0.445	0.012
+10000	sorted	no	3	0.500	0.008
+10000	reverse	no	3	0.270	0.008
+10000	random	yes	3	0.438	0.012
+10000	sorted	yes	3	0.457	0.008
+10000	reverse	yes	3	0.254	0.008
+
+
+The timings of sort stayed consistent no matter whether they were sorted random or reverse. This may be because they had a superior sorting algorithm that sorted the numbers efficiently. Whereas usel was dependent on the type of list that it was given. It had shown longer process times for sorted , mainly because it would go through the entire list at and insert it at the end However, it was better at reverse due to an if statement to which checks if it?s at the front so it's primitive operation only needed to be run once. The sort function had shown that random had lead to higher time , which may conclude that it is not optimised for random lists but rather sorted lists. For both sort and usel duplicates did not seem to effect the complexity of time as a simple <= or >= operation would not increase the amount of primitive operations
+

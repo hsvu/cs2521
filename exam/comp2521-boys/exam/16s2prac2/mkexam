@@ -1,0 +1,200 @@
+#!/usr/bin/php
+<?
+if (count($argv) < 2) exit("Usage: $argv[0] ExamFile\n");
+$in = openFile($argv[1],"r");
+
+// Collect course and exam info
+
+if (!skipTo($in,"<exam>")) exit("Not an exam file\n");
+$courseInfo = explode(":",trim(fgets($in)));
+if (count($courseInfo) != 3) exit("Bad course info\n");
+$examInfo = explode(":",trim(fgets($in)));
+if (count($examInfo) != 6) exit("Bad exam info\n");
+
+$files = array();
+
+// Collect instructions
+
+if (!skipTo($in,"<instructions>")) exit("Missing <instructions>\n");
+$text = "";
+while (($line = getLine($in)) !== false) {
+	if (hasTag($line,"<notes>") || hasTag($line,"<question>")) break;
+	$text .= $line;
+}
+$files["Instructions"] = array("index.html",$text,"");
+
+/***
+// Could be used for supplied data ...
+// Collect Notes
+if (hasTag($line,"<notes>")) {
+	$text = "";
+	while (($line = getLine($in)) !== false) {
+		if (hasTag($line,"<question>")) break;
+		$text .= $line;
+	}
+	$files["Notes"] = array("notes.html",$text);
+}
+***/
+
+// Hack for COMP1927
+
+$files["C language"] = array("C/index.html","","C");
+$files["Algorithms"] = array("Algos/index.html","","Algos");
+
+
+// Collect questions
+
+$questions = array(); $q = 0;  $totMark = 0;
+do {
+	if (hasTag($line,"<question>")) {
+		if ($q > 0) {
+			$qfile = sprintf("Q%02d.html",$q);
+			$files["Q$q"] = array($qfile,$qtext,"");
+			$qmarks["Q$q"] = $qmark;
+		}
+		$q++;
+		$qmark = 0;
+		list($x,$qmark) = explode(" ",trim($line));
+		if ($qmark == 0) echo "Missing mark for Q$q\n";
+		$totMark += $qmark;
+		$qtext = "";
+		continue;
+	}
+	if ($q > 0) $qtext .= $line;
+} while (($line = getLine($in)) !== false);
+$qfile = sprintf("Q%02d.html",$q);
+$files["Q$q"] = array($qfile,$qtext,"");
+$qmarks["Q$q"] = $qmark;
+
+// Check data from exam file against collected info
+
+if ($q != $examInfo[4]) {
+	echo "Questions? got $q, expected $examInfo[4]\n";
+	$examInfo[4] = $q;
+}
+if ($totMark != $examInfo[5]) {
+	echo "Marks? got $totMark, expected $examInfo[5]\n";
+	$examInfo[5] = $totMark;
+}
+
+// Write the HTML files
+
+foreach ($files as $link => $data) {
+	list($fname,$text) = $data;
+	if ($text == "") continue;
+	$out = openFile($fname,"w");
+	putHeader($out,$link,$courseInfo,$examInfo,$files);
+	if ($link == "Instructions")
+		putInfo($out,$courseInfo,$examInfo);
+	elseif (preg_match('/Q[0-9]/',$link)) {
+		$qno = substr($link,1,10);
+		putQuestion($out,$qno,$qmarks[$link]);
+		$text = str_replace("<Q>",$qno,$text);
+	}
+	fputs($out,"$text\n</div>\n</body>\n</html>\n");
+	fclose($out);
+}
+
+// Helpers
+
+function putHeader($outf,$link,$cInfo,$xInfo,$files)
+{
+	list($cCode,$cTerm,$cTitle) = $cInfo;
+	list($xTitle,$xMonth,$xTimes,$xDuration,$xNq,$xMarks) = $xInfo;
+	$html = <<<_HTML_
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>$cCode $cTerm $xTitle</title>
+<link rel='stylesheet' type='text/css' href='exam.css'></head>
+<body>
+<div align='center'>
+<table width='100%' border='0'>
+<tr valign='top'>
+<td align='left' width='25%'>
+  <span class='tiny'>$cCode $cTerm</span>
+</td>
+<td align='center' width='50%'>
+  <span class='heading'>$cCode $cTerm $xTitle</span>
+</td>
+<td align='right' width='25%'>
+  <span class='tiny'>$cTitle</span>
+</td>
+</table>
+</div>
+<center>
+_HTML_;
+	$seenQ = false;
+	foreach ($files as $xLink => $xData) {
+		list($fname,$text,$target) = $xData;
+		if ($xLink[0] == "Q" && !$seenQ)
+			{ $html .= "<br>"; $seenQ = true; }
+		if ($link == $xLink)
+			$html .= "<b>[$xLink]</b> ";
+		elseif ($xLink[0] != "Q" && !empty($target))
+			$html .= "<a target='$target' href='$fname'>[$xLink]</a> ";
+		else
+			$html .= "<a href='$fname'>[$xLink]</a> ";
+	}
+	$html .= "\n</center>\n<hr>\n";
+	$html .= "<div style='margin-left:40px;margin-right:40px'>\n";
+	fputs($outf, $html);
+}
+
+function putQuestion($outf,$qno,$qmark)
+{
+	$M = ($qmark == 1) ? "mark" : "marks";
+	$text = "<h3>Question $qno <span class='tiny'>($qmark $M)</span></h3>\n";
+	fputs($outf, $text);
+}
+
+function putInfo($outf,$cInfo,$xInfo)
+{
+	list($cCode,$cTerm,$cTitle) = $cInfo;
+	list($xTitle,$xMonth,$xTimes,$xDuration,$xNq,$xMarks) = $xInfo;
+	$info = <<<_HTML_
+<center>
+<h1>$cCode $cTerm $xTitle</h1>
+<h2>$xMonth</h2>
+<h3>Questions: $xNq<br>
+Marks: $xMarks<br>
+Time: $xDuration hours<br></h3>
+</center>
+_HTML_;
+	fputs($outf,$info);
+}
+
+function openFile($name,$mode)
+{
+	$handle = fopen($name,$mode);
+	if (!is_resource($handle)) exit("Can't open $name\n");
+	return $handle;
+}
+
+function closeFile($outf)
+{
+	fputs($out,"\n</body>\n</html>\n");
+	fclose($out);
+}
+
+function hasTag($line,$tag)
+{
+	return (stristr(trim($line),$tag) !== false);
+}
+
+function skipTo($in,$tag)
+{
+	while (($line = getLine($in)) !== false) {
+		if (trim($line) == $tag) return true;
+	}
+	return false;
+}
+
+function getLine($inf)
+{
+	if (feof($inf))
+		return false;
+	else
+		return fgets($inf);
+}
+?>

@@ -1,0 +1,417 @@
+<exam>
+COMP1927:16s2:Computing 2
+Practice Prac Exam:Week 13 16s2:in the Lab:1:9:5
+
+<instructions>
+<center>
+<p class="red">
+Read <b>all</b> of the instructions below while you are waiting.
+<br>You will most likely need to scroll to see everything.
+</p>
+<p>
+<table cellpadding="8"><tr><td>
+<b>About this Exam web-site:</b>
+<ul>
+<li> the Instructions and the Questions use one browser tab
+<li> the C language material and the Algorithms material have<br>
+     their own browser tabs, which will be created the first time<br>
+     that you click on the link
+<li> note: all of the files for the practcal questions and the<br>
+     template files for the other questions were copied into<br>
+     your working directory when you logged in to the exam<br>
+     environment
+<li> your working directory should contain two subdirectories<br>
+     (<tt>q1</tt>, <tt>q2</tt>) containing files for the prac questions
+</ul>
+<b>Start-of-Exam Instructions:</b>
+<ul>
+<li> Switch off your laptop/phone.
+<li> Place all laptops/phones/etc. off the desk (preferably in a bag).
+<li> Place your student card on the desk.
+<li> <em>Wait</em> for the supervisor to tell you to start reading the questions.
+</ul>
+<b>End-of-Exam Instructions:</b>
+<ul>
+<li> Stop typing when the supervisor tells you.
+<li> Log out from your workstation.
+<li> Take all of your belongings.
+</ul>
+<b>General Instructions:</b>
+<ul>
+<li> Answer <b>all</b> questions.
+<li> Questions are worth equal marks.
+<li> Questions may be answered in any order.
+<li> Calculators/textbooks/notes/phones/laptops are <b>not</b> permitted.
+<li> Calculator apps (e.g. <tt>bc</tt>, <tt>xcalc</tt>) are available on your workstation.
+<li> During the Exam, you must <b>not</b>
+<ul>
+<li> communicate with other students in <em>any</em> way
+<li> access any of your own files
+<li> access any web pages except those attached to this web site
+</ul>
+<li> Answers must be submitted using the <tt>submit</tt> command
+<li> Each question contains instructions on using <tt>submit</tt>
+</ul>
+<p>
+If you believe that insufficient information has been provided to answer <br>
+a given question, then you should write any assumptions that you think are <br>
+necessary to complete the question and continue work from there. If the <br>
+assumptions are reasonable, you can still obtain full marks for the question.
+</p>
+<p>
+Note that marks are awarded primarily for working, not just for getting <br>
+the correct final answer. If you get an incorrect final answer in one part<br>
+of a question and use it in a later part of that question, it is still possible <br>
+to achieve full marks for the later part if all working is correct.
+</p>
+<p>
+For programming questions, you can only receive full marks for a <br>
+correctly-working program that compiles with no warnings. If you simply <br>
+submit the supplied file or if your program has compilation warnings/errors,<br>
+then it is worth zero marks. A program that compiles but does not produce <br>
+the expected result will receive partial-mark based on how close it is <br>
+to being correct.
+</p>
+<td></tr></table>
+<br>
+<p>
+<b>End of instructions.</b>
+</p>
+</center>
+
+<question> 2 marks
+<p>
+In the <tt>q<Q></tt> directory (in the file <tt>main.c</tt>),
+is a program which
+</p>
+<ul>
+<li>reads a sequence of (key,value) pairs from stdin and stores them in a binary search tree <tt>t</tt></li>
+<li>displays the tree</li>
+<li>calls a function <tt>map(t,f)</tt> to modify the value in each node in the tree using a function parameter <tt>f</tt></li>
+<li>displays the modified tree</li>
+</ul>
+<p>
+The main program uses its command line parameter to determine which function to apply.
+The following examples show which functions are available:
+</p>
+<center>
+<table border="1" cellpadding="6" cellspacing="0">
+<tr><th>Command</th><th>Effect</tt></tr>
+<tr><td><nobr><tt>./q1 1 &lt; tests/tree1</tt></nobr></td><td>reads (key,value) pairs from file <tt>tests/tree1</tt> and decrements each value by 1 (using the function <tt>decr()</tt>)</td></tr>
+<tr><td><nobr><tt>./q1 2 &lt; tests/tree1</tt></nobr></td><td>reads (key,value) pairs from file <tt>tests/tree1</tt> and doubles each value (using the function <tt>duble()</tt>)</td></tr>
+<tr><td><nobr><tt>./q1 3 &lt; tests/tree1</tt></nobr></td><td>reads (key,value) pairs from file <tt>tests/tree1</tt> and squares each value (using the function <tt>square()</tt>)</td></tr>
+</table>
+</center>
+<p>
+The <tt>decr()</tt>, <tt>duble()</tt> and <tt>square()</tt> functions are
+all defined in <tt>main.c</tt>. The <tt>map()</tt> function is defined in the <tt>BSTree</tt> ADT.
+</p>
+<p>
+The following diagram shows an application of the <tt>map()</tt> function on a tree
+using the <tt>duble</tt> function to double the value in each node.
+Note that the keys and the structure of the tree are unaffected by <tt>map()</tt>.
+</p>
+<center><img src="Pics/tree.png"></center>
+<p>
+The <tt>q<Q></tt> directory also contains an implementation
+of a binary search tree ADT in the files <tt>BSTree.h</tt> and <tt>BSTree.c</tt>.
+You do not need to understand the details of all of the functions in <tt>BSTree.c</tt>,
+but you should familiarise yourself with the structure of <tt>BSTreeNode</tt>s
+as defined in that file.
+</p>
+<p>
+<b>Your task</b> for this question is to implement the <tt>map()</tt> function
+in the <tt>BSTree.c</tt> file.
+</p>
+<p>
+The <tt>map()</tt> function is defined as follows:
+</p>
+<pre>
+void map(BSTree t, int (*f)(int)) { ... }
+</pre>
+<p>
+and takes two parameters:
+</p>
+<ul>
+<li> <tt>t</tt> ... an instance of the <tt>BSTree</tt> ADT (i.e. a binary search tree) </li>
+<li> <tt>f</tt> ... a pointer to a function mapping an <tt>int</tt> to an <tt>int</tt> </li>
+</ul>
+<p>
+The <tt>map()</tt> function applies <tt>f</tt> to the value in
+each tree node, and then replaces the original value in the node
+by the result returned by the function.
+The actual function supplied for <tt>f</tt> must have the type
+<tt>int</tt>&rightarrow;<tt>int</tt> (e.g. like <tt>decr()</tt>).
+You can find a skeleton <tt>map()</tt> function at around line 137
+in the <tt>BSTree.c</tt> file.
+</p>
+<p>
+You can find out more about the behaviour of the <tt>q<Q></tt> program
+by looking at the files in <tt>q<Q>/tests</tt> directory.
+Each file named <tt>t<i>X</i>.sh</tt> contains the commands to run one test.
+Each test uses one of the files named <tt>tree<i>X</i></tt> as input.
+Each test has a corresponding file <tt>t<i>X</i>.exp</tt> which contains
+the expected output from a correct implementation of <tt>q<Q></tt>,
+run using <tt>t<i>X</i>.sh</tt>.
+</p>
+<p>
+The <tt>q<Q></tt> directory also contains a <tt>Makefile</tt> which you use as:
+</p>
+<pre>
+make q<Q>    <span class="comment"># build the q<Q> program</span>
+</pre>
+<p>
+You can test your <tt>q<Q></tt> program using the command:
+</p>
+<pre>
+check q<Q>   <span class="comment"># run tests on the q<Q> program</span>
+</pre>
+<p>
+Once you are satisfied with your program, submit it using the command:
+</p>
+<pre>
+submit q<Q>
+</pre>
+<p>
+This will make a copy of the <tt>BSTree.c</tt> file from the <tt>q<Q></tt>
+directory as your answer for this question.
+You can run the <tt>submit</tt> command as many times as you like,
+but make sure that your final submission compiles without any errors
+or warnings.
+Test your program thoroughly, possibly using test cases additional
+to those supplied. Your program will be tested using inputs which
+are different to the examples in the <tt>q<Q>/tests</tt> directory.
+</p>
+<p>
+You can add any additional functions (apart from <tt>map()</tt>) to
+the <tt>BSTree.c</tt> file, but you may not change any of the other
+files.
+</p>
+<p>
+If, at some stage, you need to "re-install" the files (although you
+should not need to), you can copy all of the original files
+into the <tt>q<Q></tt> directory by running the command:
+</p>
+<pre>
+re-start q<Q>
+</pre>
+<p>
+Beware: this will overwrite all of your exsting files for this
+question, so only do it if you seriously mess things up.
+</p>
+
+<question> 3 marks
+<p>
+In the <tt>q<Q></tt> directory (in the file <tt>main.c</tt>) is a program which
+</p>
+<ul>
+<li> takes three command line arguments: <i>EdgeFile, StartVertex, Dist</i></li>
+<li> reads edge data from the <i>EdgeFile</i> and builds a graph data structure</li>
+<li> calls a function determine all vertices within distance <i>Dist</i> of the <i>StartVertex</i></li>
+<li> prints all of these vertices, one per line, to standard output</li>
+</ul>
+<p>
+Distance to a vertex <i>V</i> is measured in terms of the number of edges
+on the shortest path between <i>StartVertex</i> and vertex <i>V</i>.
+The list of vertices should <em>not</em> include <i>StartVertex</i> and
+should include all vertices whose distance to <i>StartVertex</i> is less
+than or equal to <i>Dist</i>.
+Each relevant vertex should occur in the list exactly once (no duplicates).
+</p>
+<p>
+Also in the <tt>q<Q></tt> directory are source code for a number of potentially
+useful ADTs. In particular, the files <tt>Graph.h</tt> and <tt>Graph.c</tt>
+define a <tt>Graph</tt> ADT which uses an adjacency matrix representation.
+</p>
+<p>
+The <tt>main</tt> function prints the list of vertices, but the list is actually
+computed by the function
+</p>
+<pre>
+int within(Graph g, Vertex s, int d, Vertex *vs) { ... }
+</pre>
+<p>
+defined in the <tt>Graph</tt> ADT. (It is called <tt>within</tt> because all
+of the vertices in the list must be <em>within</em> a distance <tt>d</tt>
+of the start vertex).
+</p>
+<p>
+<b>Your task</b> for this question is to implement the <tt>within()</tt> function
+in the <tt>Graph.c</tt> file.
+<p>
+The <tt>within()</tt> function takes four parameters:
+</p>
+<ul>
+<li> <tt>g</tt> ... an instance of the <tt>Graph</tt> ADT </li>
+<li> <tt>s</tt> ... the start/origin vertex </li>
+<li> <tt>d</tt> ... the maximum distance from the start vertex </li>
+<li> <tt>vs</tt> ... the address of an array of <tt>Vertex</tt> values </li>
+</ul>
+<p>
+The function stores all reachable vertices in the <tt>vs[]</tt> array
+and returns a count of the number of <tt>Vertex</tt> values stored in
+the array.
+You can assume that the <tt>vs[]</tt> array is large enough
+to store all of vertices in the graph, if needed.
+The order that you store the vertices in the <tt>vs[]</tt> array is
+not important; the test scripts sort the output before comparing it
+against the expected results.
+You can find a skeleton <tt>within()</tt> function at around line 272
+in the <tt>Graph.c</tt> file.
+</p>
+<p>
+To give some concrete examples, consider the following undirected graphs:
+</p>
+<center>
+<table border="0">
+<tr>
+ <td><img src="Pics/graph1.png"></td>
+ <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+ <td><img src="Pics/graph2.png"></td>
+</tr>
+<tr>
+ <td align="center"><b>Graph1</b></td>
+ <td> &nbsp; </td>
+ <td align="center"><b>Graph2</b></td>
+</tr>
+</table>
+</center>
+<p>
+The following table shows the sets of vertices that would be produced
+for various calls to the <tt>within()</tt> function:
+</p>
+<center>
+<table border="1" cellpadding="6" cellspacing="0">
+<tr>
+ <th>Call to <tt>within()</tt> function</th>
+ <th><tt>x</tt></th>
+ <th>Vertices in vs[]</th>
+</tr>
+<tr>
+ <td><tt>x = within(<i>Graph1</i>,0,1,vs)</tt></td>
+ <td>3</td>
+ <td>{1,2,3}</td>
+</tr>
+<tr>
+ <td><tt>x = within(<i>Graph1</i>,0,2,vs)</tt></td>
+ <td>6</td>
+ <td>{1,2,3,4,5,6}</td>
+</tr>
+<tr>
+ <td><tt>x = within(<i>Graph1</i>,6,1,vs)</tt></td>
+ <td>1</td>
+ <td>{3}</td>
+</tr>
+<tr>
+ <td><tt>x = within(<i>Graph1</i>,6,2,vs)</tt></td>
+ <td>2</td>
+ <td>{0,3}</td>
+</tr>
+<tr>
+ <td><tt>x = within(<i>Graph1</i>,6,3,vs)</tt></td>
+ <td>4</td>
+ <td>{0,1,2,3}</td>
+</tr>
+<tr>
+ <td><tt>x = within(<i>Graph2</i>,0,2,vs)</tt></td>
+ <td>6</td>
+ <td>{1,2,4,5,6,9}</td>
+</tr>
+<tr>
+ <td><tt>x = within(<i>Graph2</i>,0,99,vs)</tt></td>
+ <td>11</td>
+ <td>{1,2,3,4,5,6,7,8,9,10,11}</td>
+</tr>
+</table>
+</center>
+</p>
+<p>
+You can find out more about the behaviour of the <tt>q<Q></tt> program
+by looking at the files in <tt>q<Q>/tests</tt> directory.
+Each file named <tt>t<i>X</i>.sh</tt> contains the commands to run one test.
+Each test will use one of the files named <tt>graph<i>X</i></tt> as input.
+Each test has a corresponding file <tt>t<i>X</i>.exp</tt> which contains
+the expected output from a correct implementation of <tt>q<Q></tt>,
+run using <tt>t<i>X</i>.sh</tt>.
+</p>
+<p>
+The <tt>q<Q></tt> directory also contains a <tt>Makefile</tt> which you use as:
+</p>
+<pre>
+make q<Q>    <span class="comment"># build the q<Q> program</span>
+</pre>
+<p>
+You can test your <tt>q<Q></tt> program using the command:
+</p>
+<pre>
+check q<Q>   <span class="comment"># run tests on the q<Q> program</span>
+</pre>
+<p>
+Once you are satisfied with your program, submit it using the command:
+</p>
+<pre>
+submit q<Q>
+</pre>
+<p>
+This will make a copy of the <tt>Graph.c</tt> file from the <tt>q<Q></tt>
+directory as your answer for this question.
+You can run the <tt>submit</tt> command as many times as you like,
+but make sure that your final submission compiles without any errors
+or warnings.
+Test your program thoroughly, possibly using test cases additional
+to those supplied. Your program will be tested with extra tests that
+are different to the examples in the <tt>q<Q>/tests</tt> directory.
+</p>
+<p>
+You can add any additional functions (apart from <tt>within()</tt>) to
+the <tt>Graph.c</tt> file, but you may not change any of the other
+files.
+</p>
+<p>
+If, at some stage, you need to "re-install" the files (although you
+should not need to), you can copy all of the original files
+into the <tt>q<Q></tt> directory by running the command:
+</p>
+<pre>
+re-start q<Q>
+</pre>
+<p>
+Beware: this will overwrite all of your existing files for this
+question, so only do it if you seriously mess things up.
+</p>
+
+
+<question> 0 marks
+<p>
+In the real exam, this will contain another programming question.
+</p>
+
+<question> 0 marks
+<p>
+In the real exam, this will contain a written question.
+</p>
+
+<question> 0 marks
+<p>
+In the real exam, this will contain a written question.
+</p>
+
+<question> 0 marks
+<p>
+In the real exam, this will contain a written question.
+</p>
+
+<question> 0 marks
+<p>
+In the real exam, this will contain a written question.
+</p>
+
+<question> 0 marks
+<p>
+In the real exam, this will contain a written question.
+</p>
+
+<question> 0 marks
+<p>
+In the real exam, this will contain a written question.
+</p>

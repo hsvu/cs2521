@@ -1,0 +1,15 @@
+Input	Initial	Has	Number	AvgTime	AvgTime
+Size	Order	Dups	of runs	forusel	forsort
+5000	random	no	3	0.124	0.008
+5000	sorted	no	3   	0.181	0.004
+5000	reverse	no	3	0.102	0.004
+5000	random	yes	3	0.152	0.008
+5000	sorted	yes	3	0.184	0.002
+5000	reverse	yes	3	0.092	0.004
+10000	random	no	3	0.445	0.012
+10000	sorted	no	3	0.500	0.008
+10000	reverse	no	3	0.270	0.008
+10000	random	yes	3	0.438	0.012
+10000	sorted	yes	3	0.457	0.008
+10000	reverse	yes	3	0.254	0.008
+

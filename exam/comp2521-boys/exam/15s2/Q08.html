@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>COMP1927 15s2 Final Exam</title>
+<link rel='stylesheet' type='text/css' href='exam.css'></head>
+<body>
+<div align='center'>
+<table width='100%' border='0'>
+<tr valign='top'>
+<td align='left' width='25%'>
+  <span class='tiny'>COMP1927 15s2</span>
+</td>
+<td align='center' width='50%'>
+  <span class='heading'>COMP1927 15s2 Final Exam</span>
+</td>
+<td align='right' width='25%'>
+  <span class='tiny'>Computing 2</span>
+</td>
+</table>
+</div>
+<center><a href='index.html'>[Instructions]</a> <a target='C' href='C/index.html'>[C language]</a> <a target='Algos' href='Algos/index.html'>[Algorithms]</a> <br><a href='Q01.html'>[Q1]</a> <a href='Q02.html'>[Q2]</a> <a href='Q03.html'>[Q3]</a> <a href='Q04.html'>[Q4]</a> <a href='Q05.html'>[Q5]</a> <a href='Q06.html'>[Q6]</a> <a href='Q07.html'>[Q7]</a> <b>[Q8]</b> <a href='Q09.html'>[Q9]</a> 
+</center>
+<hr>
+<div style='margin-left:40px;margin-right:40px'>
+<h3>Question 8 <span class='tiny'>(8 marks)</span></h3>
+<p>
+Consider a hash table that uses <em>chaining</em> for collision resolution
+and stores items in the chains in ascending order on key value.
+The table has 11 slots and uses the following hash function:
+</p>
+<pre>
+int hash(int k) { return (k % 11); }
+</pre>
+<p>
+As an example, the following diagram shows the state of such a hash table
+after items containing the keys 7, 16, 18, 20, 27, 29 and 33 are inserted
+into an initially empty table:
+</p>
+<center><img src="Pics/hashtab.png"></center>
+<p>
+Now consider a scenario where we start with an initially empty table
+and insert items with key values 1 to 100 (inclusive) into the table.
+<ol type="A">
+<li><p>
+What is the <em>average</em> chain length in this table? Show your working. <small>(2 marks)</small>
+</p></li>
+<li><p>
+How many items are examined in searching for the key 42? <small>(1 mark)</small>
+</p></li>
+<li><p>
+How many items are examined in searching for the key 999? <small>(1 mark)</small>
+</p></li>
+<li><p>
+If we continue inserting keys in sequence (101, 102, 103, ...),
+what is the worst-case search cost after <i>N</i> items have been
+inserted? (Measure search cost in terms of the number of items examined)
+<small>(1 mark)</small>
+</p></li>
+<li><p>
+What is the best-case search cost after <i>N</i> items have been
+inserted? (Measure search cost in terms of the number of items examined)
+<small>(1 mark)</small>
+</p></li>
+</ol>
+<p>
+Now consider starting with an empty hash table once again.
+</p>
+<ol type="A" start="6">
+<li><p>
+Write a C <tt>for</tt>-loop to generate a sequence
+of key values that would produce a single long chain
+containing 100 items,
+if items with these keys were inserted into an initially empty table.
+<small>(2 marks)</small>
+</p></li>
+</ol>
+<p>
+Type the answer to this question into the file called
+<tt>q8.txt</tt> and submit it using the command:
+</p>
+<pre>
+submit q8
+</pre>
+
+
+
+</div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+Results for Tests on 5000 values
+
+Depth = depth of tree, Cost = average #comparisons per search
+
+
+             Ascending Order        Prefix Order        Random Order
+Insert
+Method       Depth      Cost     Depth      Cost     Depth      Cost
+
+L         __5000_  __12497500_     13  ___51822_  ___28__  __   75016__
+
+A         _5000_  ____4999       __2954_  ___14058_  ___28___  ___70759_
+
+R         __2492___  ___10096__  __1774__  _20080__  __70786__  _35237___
+
+B         __204_  ___351531_  ____20___  __75113__  ___23___  __ 59069__
+
+S         ___4999_  ___7498_  ___ 3977_  ___12997_  ___31____  _73269__
+
+V         ___13___  __56809_  ___14__  ___58490_  ____15_  __55829_
+
+
+Notes (what the above indicates):
+Inserting at the root of the node of ascending order had the most cost this is because , they had to bring it down and thus would have to go through every single existing node
+Inserting new value at the root for ascending order has the best cost scenario because it would only need to do one operation
+
+Random order had varying cost this is due to the nature of the function as it would depend on which insert method it would pick. With Inserting at the root being the best case scenario for ascending ,
+
+For majority of the cases the depth was low for as most of these were balanced trees . The cases where the depth was with inserting in a standard tree in ascending or descending. 
+
+For insert in a balancing tree , the depth would be relatively small however the cost will be large due to the cost of balancing a tree being really large.
+
+For insert into a splay tree , the depth is shown to be large for ascending due to the nature of it, with prefix order it is shown to be still quite deep however random order seems to have less depth . This may
+be due to the way this splay tree algorithm chooses its time to rebalance
+
+For avl trees the cost for all orders are very large , as it is a self balancing tree . With this the depth of the tree would be minimum.

@@ -1,0 +1,56 @@
+Results for Tests on 5000 values
+
+Depth = depth of tree, Cost = average #comparisons per search
+
+
+             Ascending Order        Prefix Order        Random Order
+Insert
+Method       Depth      Cost     Depth      Cost     Depth      Cost
+
+L              5000     3114        13     15.67        28     15.95
+
+A              5000     2515      2954      2229        28     21.71
+
+R              2492    951.4      1774     673.8        27     15.15
+
+B              206     125.0        20     27.28        23     26.04
+
+S               33         0        29         0      1149         0
+
+V               13     23.56        14     24.19        15     11.78
+
+"
+Notes (what the above indicates):
+
+* Random order input demands relatively similar cost regardless of
+tree datatype with the exception of splay trees
+
+* (L) Insertion at Leaf: At the bottom of the tree
+Insertion at leaf in ascending order requires the greatest number of
+comparisons. A comparison must be made while traversing the entire branch,
+but entire branch is linear (hence the 5000 depth), and each new node
+must be placed at the bottom. However, random order and prefix order
+have a notably smaller depth and hence cost. This is because the trees are
+more likely to be balanced, are already balanced, respectively.
+
+* (A) At root
+In ascending order produces maximal depth and hence greatest cost. Prefix
+produces multiple occurrences of single branching, which slightly reduces the
+comparisons needed.
+
+* (R) L and A randomly
+Combined use balance out the tree; relatively lower costs overall.
+
+* (V) AVL self-balancing:
+AVL significantly less costly with R input as it guarantees to maintain
+balance and maximises the "binary" component of BSTs. Log(n). Because the
+AVL approach requires constant balancing, the depth of the tree is kept to
+a minimum.
+
+* (S) Splay:
+Splay has low cost because nodes are moved toward the root. When
+values are in a random order, the depth increases exponentially.
+This is due to numbers being more "slanted" towards a particular number
+e.g. more numbers are greater than 300 and hence leaning towards the right.
+This is unlike ascending/prefix order which can be split relatively evenly
+between left and right branches.

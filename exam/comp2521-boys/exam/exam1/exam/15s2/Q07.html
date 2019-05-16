@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>COMP1927 15s2 Final Exam</title>
+<link rel='stylesheet' type='text/css' href='exam.css'></head>
+<body>
+<div align='center'>
+<table width='100%' border='0'>
+<tr valign='top'>
+<td align='left' width='25%'>
+  <span class='tiny'>COMP1927 15s2</span>
+</td>
+<td align='center' width='50%'>
+  <span class='heading'>COMP1927 15s2 Final Exam</span>
+</td>
+<td align='right' width='25%'>
+  <span class='tiny'>Computing 2</span>
+</td>
+</table>
+</div>
+<center><a href='index.html'>[Instructions]</a> <a target='C' href='C/index.html'>[C language]</a> <a target='Algos' href='Algos/index.html'>[Algorithms]</a> <br><a href='Q01.html'>[Q1]</a> <a href='Q02.html'>[Q2]</a> <a href='Q03.html'>[Q3]</a> <a href='Q04.html'>[Q4]</a> <a href='Q05.html'>[Q5]</a> <a href='Q06.html'>[Q6]</a> <b>[Q7]</b> <a href='Q08.html'>[Q8]</a> <a href='Q09.html'>[Q9]</a> 
+</center>
+<hr>
+<div style='margin-left:40px;margin-right:40px'>
+<h3>Question 7 <span class='tiny'>(6 marks)</span></h3>
+<p>
+Consider the bottom-up version of mergesort:
+</p>
+<pre>
+#define min(A,B) ((A < B) ? A : B)
+
+void mergesort(char a[], int lo, int hi)
+{
+   int i, m; <span class="comment">// m = length of runs</span>
+   int end; <span class="comment">// end of 2nd run</span>
+   for (m = 1; m &lt;= hi-lo; m = 2*m) {
+      for (i = lo; i &lt;= hi-m; i += 2*m) {
+         end = min(i+2*m-1, hi);
+         merge(a, i, i+m-1, end);
+      }
+      <span class="comment">// show state of array at this point</span>
+   }
+}
+void merge(char a[], int lo, int mid, int hi)
+{
+   int  i, j, k, n = hi-lo+1;
+   char *tmp = malloc(n*sizeof(char));
+   i = lo; j = mid+1; k = 0;
+   <span class="comment">// scan both segments, copying to tmp</span>
+   while (i &lt;= mid && j &lt;= hi) {
+     if (a[i] &lt; a[j])
+        tmp[k++] = a[i++];
+     else
+        tmp[k++] = a[j++];
+   }
+   <span class="comment">// copy items from unfinished segment</span>
+   while (i &lt;= mid) tmp[k++] = a[i++];
+   while (j &lt;= hi) tmp[k++] = a[j++];
+   <span class="comment">//copy tmp back to main array</span>
+   for (i = lo, k = 0; i &lt;= hi; i++, k++)
+      a[i] = tmp[k];
+   free(tmp);
+}
+</pre>
+<p>
+Now consider sorting the following array:
+</p>
+<center><img src="Pics/sorting.png"></center>
+<p>
+via the following call to the <tt>mergesort()</tt> function:
+</p>
+<pre>
+mergesort(A, 0, 15);
+</pre>
+<ol type="A">
+<li><p>
+Show the state of the array after each execution of the inner <tt>for</tt>
+loop (see comment in program).
+<small>(4 marks)</small>
+</p>
+<p>
+Simply writing a sequence of characters is adequate to show the state
+of the array, e.g.
+</p>
+<pre>
+s o r t i n g i s a w e s o m e
+</pre>
+</p></li>
+<li><p>
+What is the purpose of the statement &nbsp; <tt>end = min(i+2*m-1, hi)</tt>?
+<small>(2 marks)</small>
+</p></li>
+</ol>
+<p>
+Type the answer to this question into the file called
+<tt>q7.txt</tt> and submit it using the command:
+</p>
+<pre>
+submit q7
+</pre>
+
+
+
+</div>
+</body>
+</html>

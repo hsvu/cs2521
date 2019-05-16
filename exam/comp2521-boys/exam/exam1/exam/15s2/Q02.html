@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>COMP1927 15s2 Final Exam</title>
+<link rel='stylesheet' type='text/css' href='exam.css'></head>
+<body>
+<div align='center'>
+<table width='100%' border='0'>
+<tr valign='top'>
+<td align='left' width='25%'>
+  <span class='tiny'>COMP1927 15s2</span>
+</td>
+<td align='center' width='50%'>
+  <span class='heading'>COMP1927 15s2 Final Exam</span>
+</td>
+<td align='right' width='25%'>
+  <span class='tiny'>Computing 2</span>
+</td>
+</table>
+</div>
+<center><a href='index.html'>[Instructions]</a> <a target='C' href='C/index.html'>[C language]</a> <a target='Algos' href='Algos/index.html'>[Algorithms]</a> <br><a href='Q01.html'>[Q1]</a> <b>[Q2]</b> <a href='Q03.html'>[Q3]</a> <a href='Q04.html'>[Q4]</a> <a href='Q05.html'>[Q5]</a> <a href='Q06.html'>[Q6]</a> <a href='Q07.html'>[Q7]</a> <a href='Q08.html'>[Q8]</a> <a href='Q09.html'>[Q9]</a> 
+</center>
+<hr>
+<div style='margin-left:40px;margin-right:40px'>
+<h3>Question 2 <span class='tiny'>(11 marks)</span></h3>
+In the <tt>q2</tt> directory (in the file <tt>main.c</tt>) is a program which
+</p>
+<ul>
+<li> reads words, one per line, from standard input
+<li> normalises each word by converting it to all lower-case
+<li> builds a trie using the normalised words as keys
+<li> then prints all of the keys in the trie, one per line, on standard output
+</ul>
+<p>
+The overall effect is that the program prints a list of all the 
+words in the input, in some order not necessarily related to the
+input order, and with all words being normalised.
+</p>
+<p>
+The <tt>q2</tt> directory, along with the main program, contains an
+implementation of a trie ADT. The <tt>Trie</tt> type is defined in
+the files <tt>Trie.h</tt> and <tt>Trie.c</tt>. The <tt>Trie</tt> ADT
+contains the usual collection of functions (create a new <tt>Trie</tt>,
+insert a new <tt>Item</tt> containing a key, search for <tt>Item</tt>s
+via their key values).
+It also contains a skeleton implementation of a function (<tt>showKeys()</tt>)
+to print all of the key values in the <tt>Trie</tt>.
+</p>
+<p>
+<b>Your task</b> for this question is to implement the <tt>showKeys()</tt>
+function in the <tt>Trie.c</tt> file.
+</p>
+<p>
+The <tt>showKeys()</tt> function is defined as follows:
+</p>
+<pre>
+void showKeys(Trie t)
+</pre>
+<p>
+It takes a <tt>Trie</tt> value (pointer to a <tt>TrieRep</tt> structure)
+as input, iterates over the <tt>Trie</tt> and writes each key to the
+standard output on a line by itself.
+</p>
+<p>
+You can find out more about the behaviour of the <tt>q2</tt> program
+by looking at the files in <tt>q2/tests</tt> directory.
+Each file named <tt>t<i>X</i>.sh</tt> contains the commands to run one test.
+Each test will use one of the files named <tt>t<i>X</i>.in</tt> as input.
+Each test has a corresponding file <tt>t<i>X</i>.exp</tt> which contains
+the expected output from a correct implementation of <tt>q2</tt>,
+run using <tt>t<i>X</i>.sh</tt>.
+</p>
+<p>
+The <tt>q2</tt> directory also contains a <tt>Makefile</tt> which you use as:
+</p>
+<pre>
+make q2    <span class="comment"># build the q2 program</span>
+</pre>
+<p>
+You can test your <tt>q2</tt> program using the command:
+</p>
+<pre>
+check q2   <span class="comment"># run tests on the q2 program</span>
+</pre>
+<p>
+Once you are satisfied with your program, submit it using the command:
+</p>
+<pre>
+submit q2
+</pre>
+<p>
+This will make a copy of the <tt>Trie.c</tt> file from the <tt>q2</tt>
+directory as your answer for this question.
+You can run the <tt>submit</tt> command as many times as you like,
+but make sure that your final submission compiles without any errors
+or warnings.
+Test your program thoroughly, possibly using test cases additional
+to those supplied. Your program will be tested using inputs which
+are different to the examples in the <tt>q2/tests</tt> directory.
+</p>
+<p>
+You can add any additional functions (apart from <tt>showKeys()</tt>) to
+the <tt>Trie.c</tt> file, but you may not change any of the other files.
+</p>
+<p>
+If, at some stage, you need to "re-install" the files (although you
+should not need to), you can copy all of the original files
+into the <tt>q2</tt> directory by running the command:
+</p>
+<pre>
+re-start q2
+</pre>
+<p>
+Beware: this will overwrite all of your exsting files for this
+question, so only do it if you seriously mess things up.
+</p>
+
+
+
+</div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+
+
+
+Q5.
+
+1.
+To find 60 , it takes 4 comparisons
+
+2.Minimum number of key comparisons would be 1. This is to find 42.
+
+3.Maximum number of key comparisons would be 6 . This is to find 33 and 51.
+
+4.Maximum number of key comparisons for unsuccessful search is 4. This is to find 17,18 and 19
+
+5.41 would be the new root. We could alternatively put 44 as the new root , but this will create disturbances to the structure.
+
+6.          20
+           /  \
+          9   42
+          
+          
+
+
+Q6.
+
+
+

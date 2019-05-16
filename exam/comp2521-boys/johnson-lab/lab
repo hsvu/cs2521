@@ -1,0 +1,101 @@
+COMP2521 Sort Detective Lab Report
+
+by Johnson Sim
+
+In this lab, the aim is to measure the performance of two sorting programs, without access to the code, and determine which sort algorithm each program implements.
+
+Experimental Design
+
+There are two aspects to our analysis:
+
+determine that the sort programs are actually correct
+measure their performance over a range of inputs
+Correctness Analysis
+
+To determine correctness, we tested each program on the following kinds of input 
+    
+    
+    
+    -1000000 Descending
+    -1000000 Ascending
+    -1000000 Random
+    -100000 Descending
+    -100000 Ascending
+    -100000 Random
+    -10000 Descending
+    -10000 Ascending
+    -10000 Random
+    
+
+We chose these inputs because ...
+    
+    
+    Compare them with sort as sort has know complexity of nlogn
+    
+    This was to show if there was significant differences between cases,which would show if complexity was o(n^2) or o(n*logn)
+    
+
+Performance Analysis
+    -./sortA is not adaptive=
+            is insertion sort or shell sort
+    -./sortB is adaptive
+    -sortB has the same time with ascending and descending
+            -Probs merge sort
+
+In our performance analysis, we measured how each program's execution time varied as the size and initial sortedness of the input varied. We used the following kinds of inputs
+
+
+
+
+    
+    Compare them with sort as sort has know complexity of nlogn
+    
+    This was to show if there was significant differences between cases,which would show if complexity was o(n^2) or o(n*logn)
+    
+    -----
+    NOTE
+    sortA has complexity of n2 since it thats an exponential amount of time
+    
+    
+    
+Because of the way timing works on Unix/Linux, it was necessary to repeat the same test multiple times to give a more accurate representation 
+
+We were able to use up to quite large test cases without storage overhead because (a) we had a data generator that could generate consistent inputs to be used for multiple test runs, (b) we had already demonstrated that the program worked correctly, so there was no need to check the output.
+
+
+
+
+
+We also investigated the stability of the sorting programs by ...
+
+
+
+We also investigated ... any other relevant properties ...
+
+Experimental Results
+
+Correctness Experiments
+
+An example of a test case and the results of that test is ...
+
+On all of our test cases, ...
+
+Performance Experiments
+
+For Program A, we observed that ...
+
+These observations indicate that the algorithm underlying the program ... has the following characteristics ...
+
+For Program B, we observed that ...
+
+These observations indicate that the algorithm underlying the program ... has the following characteristics ...
+
+Conclusions
+
+On the basis of our experiments and our analysis above, we believe that
+
+ProgramA implements the uvw sorting algorithm
+ProgramB implements the xyz sorting algorithm
+Appendix
+
+Any large tables of data that you want to present ...

@@ -1,0 +1,43 @@
+#!/bin/sh
+
+ulimit -t 5
+
+case $# in
+1) BIN="$1" ;;
+*) echo "Usage: $0 q1|q2|q3" ; exit 1 ;;
+esac
+
+if [ ! -f "$BIN" ]
+then
+	echo "No $BIN to test. Are you in the right directory?"
+	exit 1
+fi
+
+if [ ! -x "$BIN" ]
+then
+	echo "$BIN is not executable."
+	exit 1
+fi
+
+if [ ! -d tests ]
+then
+	echo "No tests/ directory here. Are you in the right directory?"
+	exit 1
+fi
+
+for t in t1 t2 t3 t4 t5 t6 t7 t8 t9
+do
+	if [ ! -f "tests/$t" ]
+	then
+		continue
+	fi
+	sh "tests/$t" | head -500 > tests/$t.out
+	if cmp -s tests/$t.exp tests/$t.out
+	then
+		echo Passed test $t
+	else
+		echo Failed test $t
+		echo Compare files tests/$t.exp and tests/$t.out to see differences
+	fi
+done
+

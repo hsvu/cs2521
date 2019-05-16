@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>COMP1927 15s2 Final Exam</title>
+<link rel='stylesheet' type='text/css' href='exam.css'></head>
+<body>
+<div align='center'>
+<table width='100%' border='0'>
+<tr valign='top'>
+<td align='left' width='25%'>
+  <span class='tiny'>COMP1927 15s2</span>
+</td>
+<td align='center' width='50%'>
+  <span class='heading'>COMP1927 15s2 Final Exam</span>
+</td>
+<td align='right' width='25%'>
+  <span class='tiny'>Computing 2</span>
+</td>
+</table>
+</div>
+<center><a href='index.html'>[Instructions]</a> <a target='C' href='C/index.html'>[C language]</a> <a target='Algos' href='Algos/index.html'>[Algorithms]</a> <br><a href='Q01.html'>[Q1]</a> <a href='Q02.html'>[Q2]</a> <a href='Q03.html'>[Q3]</a> <a href='Q04.html'>[Q4]</a> <b>[Q5]</b> <a href='Q06.html'>[Q6]</a> <a href='Q07.html'>[Q7]</a> <a href='Q08.html'>[Q8]</a> <a href='Q09.html'>[Q9]</a> 
+</center>
+<hr>
+<div style='margin-left:40px;margin-right:40px'>
+<h3>Question 5 <span class='tiny'>(6 marks)</span></h3>
+<p>
+Consider the following definitions:
+</p>
+<pre>
+typedef struct Node *Link;
+typedef struct Node { int key; Link L; Link R } Node;
+typedef Link Tree;
+
+int search(Tree t, int k)
+{
+   if (t == NULL)         return 0;
+   else if (k < t->key)   return search(t->L, k);
+   else if (k > t->key)   return search(t->R, k);
+   else /*(k == t->key)*/ return 1;
+}
+</pre>
+<p>
+and the following binary search tree:
+</p>
+<center><img src="Pics/bstree1.png"></center>
+<p>
+Based on the above answer the following questions:
+</p>
+<ol type="A">
+<li><p>
+How many <em>key comparisons</em> will be performed while searching
+for the key 60 in the tree?
+<li><p>
+What is the minimum number of key comparisons that would be
+required for a successful search in this tree? What search key would cause this?
+</p></li>
+<li><p>
+What is the maximum number of key comparisons that would be
+required in a successful search in this tree? What search key(s) would cause this?
+</p></li>
+<li><p>
+What is the minimum number of key comparisons that would be
+required in an unsuccessful search in this tree?
+What search key(s) would cause this?
+</p></li>
+<li><p>
+If the root node (42) were deleted, which value could replace it
+with minimal disruption to the structure of the tree?
+</p></li>
+<li><p>
+If a right rotation were performed at the root of the original
+tree (i.e. on the node containing 42), what would be the new
+value in the root node, the new value in its left child,
+and the new value in its right child?
+</ol>
+</p>
+<p>
+Type the answer to this question into the file called
+<tt>q5.txt</tt> and submit it using the command:
+</p>
+<pre>
+submit q5
+</pre>
+
+
+
+</div>
+</body>
+</html>
